@@ -18,7 +18,7 @@ mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-r9opv.mongodb.net/o
 
 app.use((req, res, next) =>{
     req.io = io;
-
+ 
     return next;
 });
 
@@ -37,4 +37,4 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')));
 
 app.use(require('./routes.js'));
 
-server.listen(3333); 
+server.listen(process.env.PORT || 3333); 
