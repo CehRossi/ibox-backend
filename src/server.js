@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const path = require('path');
 
 const app = express();
+
 const server = require('http').Server(app);
 const io = require('socket.io')(server); // Conf para que a app reconhça requisições Web Socket (ws)
 
@@ -14,12 +15,12 @@ io.on('connection', socket => {
 
 mongoose.connect('mongodb+srv://omnistack:omnistack@cluster0-r9opv.mongodb.net/omnistack?retryWrites=true', {
     useNewUrlParser: true
-})
+});
 
 app.use((req, res, next) =>{
     req.io = io;
- 
-    return next;
+
+    return next();
 });
 
 /*
@@ -37,4 +38,4 @@ app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')));
 
 app.use(require('./routes.js'));
 
-server.listen(process.env.PORT || 3333); 
+server.listen(3333); 
